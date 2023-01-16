@@ -1,0 +1,7 @@
+# Directories
+train
+test
+.ipynb_checkpoints
+
+# Files
+archive.zip
