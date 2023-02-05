@@ -3,6 +3,7 @@ dataset
 train
 test
 .ipynb_checkpoints
+__pycache__
 
 # Files
 archive.zip
