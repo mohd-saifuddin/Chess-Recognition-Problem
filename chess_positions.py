@@ -277,8 +277,9 @@ class IllegalPositions(Check):
     def rule_2(self):
         """
         This method checks if the pawns are in the first and last row of the board.
-        1. No pawn should be on the first row.
-        2. No pawn should be on the last row, if the pawn reaches the last row it gets promoted.
+        1. No pawn should be on the first row and on the last row.
+           The pawn that reaches the last row always gets promoted.
+           Hence no pawns on the last row.
         """
         flag = False
         fen_label_list = self.fen_label.split('/')
@@ -303,7 +304,8 @@ class IllegalPositions(Check):
     def rule_4(self):
         """
         This method checks if the kings are under check simultaneously.
-        1. The two kings are never under check at the same time. It is illegal.
+        1. The two kings are never under check at the same time.
+           It is illegal.
         """
         flag = False
         r_checks_K = self.rook_checks_king(attacker='r', defendant='K')
