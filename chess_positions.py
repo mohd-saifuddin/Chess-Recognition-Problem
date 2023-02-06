@@ -83,7 +83,7 @@ class Check(object):
         checks = list(filter(lambda x: len(x) == 2, checks))
         return checks
 
-    def get_l_shaped_checks(self, ai, aj, di, dj):
+    def get_knight_checks(self, ai, aj, di, dj):
         """
         This method returns the checks along the L-shaped paths for knights.
         """
@@ -175,7 +175,7 @@ class Check(object):
         else:
             return flag
         ai, aj = self.get_piece_positions(notation=attacker)
-        checks = self.get_l_shaped_checks(ai=ai, aj=aj, di=di, dj=dj)
+        checks = self.get_knight_checks(ai=ai, aj=aj, di=di, dj=dj)
         if checks:
             flag = True
         return flag
