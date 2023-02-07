@@ -15,7 +15,7 @@ class Check(object):
 
     def get_ones(self, char):
         """
-        This method returns repetitive 0s based on input character.
+        This method returns repetitive 1s based on input character.
         """
         if char.isdigit():
             return '1' * int(char)
@@ -113,6 +113,7 @@ class Check(object):
     def king_checks_king(self, attacker, defendant):
         """
         This method checks if the king is being attacked by the other king.
+        This is unlikely, but I am just adding a validation rule.
         """
         flag = False
         di, dj = self.get_piece_positions(notation=defendant)
@@ -229,48 +230,43 @@ class IllegalPositions(Check):
     def __init__(self, fen_label):
         super().__init__(fen_label)
 
-    def get_count_of_piece(self, notation):
-        """
-        This method returns the count of a piece in a chessboard.
-        """
-        piece_count = self.fen_label.count(notation)
-        return piece_count
-
     def rule_1(self):
         """
         This method checks the count of the kings and the pieces in the board.
         1. The count of white king and black king should always be 1.
-        2. The count of white queen and black queen should not cross 9.
-        3. The count of white bishop and black bishop should not cross 10.
-        4. The count of white knight and black knight should not cross 10.
-        5. The count of white rook and black rook should not cross 10.
-        6. The count of while pawn and black pawn should not cross 8.
+        2. The count of white queen and/or black queen should not cross 9.
+        3. The count of white bishop and/or black bishop should not cross 10.
+        4. The count of white knight and/or black knight should not cross 10.
+        5. The count of white rook and/or black rook should not cross 10.
+        6. The count of while pawn and/or black pawn should not cross 8.
         7. The chessboard should never be empty.
         """
         flag = False
-        k_count = self.get_count_of_piece(notation='k')
-        K_count = self.get_count_of_piece(notation='K')
-        q_count = self.get_count_of_piece(notation='q')
-        Q_count = self.get_count_of_piece(notation='Q')
-        b_count = self.get_count_of_piece(notation='b')
-        B_count = self.get_count_of_piece(notation='B')
-        n_count = self.get_count_of_piece(notation='n')
-        N_count = self.get_count_of_piece(notation='N')
-        r_count = self.get_count_of_piece(notation='r')
-        R_count = self.get_count_of_piece(notation='R')
-        p_count = self.get_count_of_piece(notation='p')
-        P_count = self.get_count_of_piece(notation='P')
-        if k_count > 1 or k_count <= 0 or K_count > 1 or K_count <= 0:
+        k_c = self.fen_label.count('k')
+        K_c = self.fen_label.count('K')
+        q_c = self.fen_label.count('q')
+        Q_c = self.fen_label.count('Q')
+        b_c = self.fen_label.count('b')
+        B_c = self.fen_label.count('B')
+        n_c = self.fen_label.count('n')
+        N_c = self.fen_label.count('N')
+        r_c = self.fen_label.count('r')
+        R_c = self.fen_label.count('R')
+        p_c = self.fen_label.count('p')
+        P_c = self.fen_label.count('P')
+        if (k_c < 1) or (K_c < 1) or (k_c < 1 and K_c < 1):
             flag = True
-        elif q_count > 9 or Q_count > 9:
+        elif (k_c > 1) or (K_c > 1) or (k_c > 1 and K_c > 1):
             flag = True
-        elif b_count > 10 or B_count > 10:
+        elif (q_c > 9) or (Q_c > 9) or (q_c > 9 and Q_c > 9):
             flag = True
-        elif n_count > 10 or N_count > 10:
+        elif (b_c > 10) or (B_c > 10) or (b_c > 10 and B_c > 10):
             flag = True
-        elif r_count > 10 or R_count > 10:
+        elif (n_c > 10) or (N_c > 10) or (n_c > 10 and N_c > 10):
             flag = True
-        elif p_count > 8 or P_count > 8:
+        elif (r_c > 10) or (R_c > 10) or (r_c > 10 and R_c > 10):
+            flag = True
+        elif (p_c > 8) or (P_c > 8) or (p_c > 8 and P_c > 8):
             flag = True
         return flag
 
@@ -284,9 +280,13 @@ class IllegalPositions(Check):
         flag = False
         fen_label_list = self.fen_label.split('/')
         f_row, l_row = fen_label_list[0], fen_label_list[-1]
-        if 'p' in f_row or 'p' in l_row:
+        p_f_row = 'p' in f_row
+        p_l_row = 'p' in l_row
+        P_f_row = 'P' in f_row
+        P_l_row = 'P' in l_row
+        if p_f_row or p_l_row or (p_f_row and p_l_row):
             flag = True
-        elif 'P' in f_row or 'P' in l_row:
+        elif P_f_row or P_l_row or (P_f_row and P_l_row):
             flag = True
         return flag
 
@@ -296,18 +296,13 @@ class IllegalPositions(Check):
         1. The king never checks the other king.
         2. The king can attack other enemy pieces except the enemy king.
         """
-        flag = False
-        if self.king_checks_king(attacker='k', defendant='K'):
-            flag = True
-        return flag
+        return self.king_checks_king(attacker='k', defendant='K')
 
     def rule_4(self):
         """
         This method checks if the kings are under check simultaneously.
         1. The two kings are never under check at the same time.
-           It is illegal.
         """
-        flag = False
         r_checks_K = self.rook_checks_king(attacker='r', defendant='K')
         n_checks_K = self.knight_checks_king(attacker='n', defendant='K')
         b_checks_K = self.bishop_checks_king(attacker='b', defendant='K')
@@ -320,29 +315,10 @@ class IllegalPositions(Check):
         P_checks_k = self.pawn_checks_king(attacker='P', defendant='k')
         is_K_checked = r_checks_K or n_checks_K or b_checks_K or q_checks_K or p_checks_K
         is_k_checked = R_checks_k or N_checks_k or B_checks_k or Q_checks_k or P_checks_k
-        if is_K_checked and is_k_checked:
-            flag = True
-        return flag
+        return is_K_checked and is_k_checked
 
     def is_illegal(self):
         """
         This method is a consolidation of all the above basic rules of chess.
         """
-        flag = False
-        r1 = self.rule_1()
-        r2 = self.rule_2()
-        r3 = self.rule_3()
-        r4 = self.rule_4()
-        if r1:
-            # print("Rule 1")
-            flag = True
-        elif r2:
-            # print("Rule 2")
-            flag = True
-        elif r3:
-            # print("Rule 3")
-            flag = True
-        elif r4:
-            # print("Rule 4")
-            flag = True
-        return flag
+        return self.rule_1() or self.rule_2() or self.rule_3() or self.rule_4()
