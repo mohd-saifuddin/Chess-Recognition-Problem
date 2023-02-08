@@ -254,19 +254,19 @@ class IllegalPositions(Check):
         R_c = self.fen_label.count('R')
         p_c = self.fen_label.count('p')
         P_c = self.fen_label.count('P')
-        if (k_c < 1) or (K_c < 1) or (k_c < 1 and K_c < 1):
+        if (k_c < 1 and K_c < 1) or (k_c < 1) or (K_c < 1):
             flag = True
-        elif (k_c > 1) or (K_c > 1) or (k_c > 1 and K_c > 1):
+        elif (k_c > 1 and K_c > 1) or (k_c > 1) or (K_c > 1):
             flag = True
-        elif (q_c > 9) or (Q_c > 9) or (q_c > 9 and Q_c > 9):
+        elif (q_c > 9 and Q_c > 9) or (q_c > 9) or (Q_c > 9):
             flag = True
-        elif (b_c > 10) or (B_c > 10) or (b_c > 10 and B_c > 10):
+        elif (b_c > 10 and B_c > 10) or (b_c > 10) or (B_c > 10):
             flag = True
-        elif (n_c > 10) or (N_c > 10) or (n_c > 10 and N_c > 10):
+        elif (n_c > 10 and N_c > 10) or (n_c > 10) or (N_c > 10):
             flag = True
-        elif (r_c > 10) or (R_c > 10) or (r_c > 10 and R_c > 10):
+        elif (r_c > 10 and R_c > 10) or (r_c > 10) or (R_c > 10):
             flag = True
-        elif (p_c > 8) or (P_c > 8) or (p_c > 8 and P_c > 8):
+        elif (p_c > 8 and P_c > 8) or (p_c > 8) or (P_c > 8):
             flag = True
         return flag
 
