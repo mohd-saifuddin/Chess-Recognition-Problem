@@ -2,9 +2,9 @@ import re
 import numpy as np
 
 
-class Check(object):
+class Board(object):
     """
-    This class is for finding an attack chess position in a board.
+    This class is defines the chessboard.
     """
 
     def __init__(self, fen_label):
@@ -37,6 +37,15 @@ class Check(object):
                 return i, j
         except:
             return None
+
+
+class Checks(Board):
+    """
+    This class finds if there are any checks in the chessboard.
+    """
+
+    def __init__(self, fen_label):
+        super().__init__(fen_label)
 
     def get_sub_matrix(self, ai, aj, di, dj):
         """
@@ -222,9 +231,9 @@ class Check(object):
         return flag
 
 
-class IllegalPositions(Check):
+class IllegalPositions(Checks):
     """
-    This class attempts to find if the chess pieces are illegally.
+    This class finds if the pieces are illegally positioned in the chessboard.
     """
 
     def __init__(self, fen_label):
