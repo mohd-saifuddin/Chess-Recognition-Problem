@@ -293,9 +293,9 @@ class IllegalPositions(Checks):
         p_l_row = 'p' in l_row
         P_f_row = 'P' in f_row
         P_l_row = 'P' in l_row
-        if p_f_row or p_l_row or (p_f_row and p_l_row):
+        if (p_f_row and p_l_row) or p_f_row or p_l_row:
             flag = True
-        elif P_f_row or P_l_row or (P_f_row and P_l_row):
+        elif (P_f_row and P_l_row) or P_f_row or P_l_row:
             flag = True
         return flag
 
