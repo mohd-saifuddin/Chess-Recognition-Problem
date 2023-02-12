@@ -15,7 +15,7 @@ class Board(object):
 
     def get_ones(self, char):
         """
-        This method returns repetitive 1s based on input character.
+        This method returns repetitive 1s based on input digit character.
         """
         if char.isdigit():
             return '1' * int(char)
