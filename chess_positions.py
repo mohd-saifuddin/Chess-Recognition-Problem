@@ -282,7 +282,7 @@ class IllegalPosition(Check):
     def rule_2(self):
         """
         This method checks if the pawns are in the first and last row of the board.
-        1. No pawn should be on the first row and on the last row.
+        1. No pawn should be on the first row and/or on the last row.
            The pawn that reaches the last row always gets promoted.
            Hence no pawns on the last row.
         """
