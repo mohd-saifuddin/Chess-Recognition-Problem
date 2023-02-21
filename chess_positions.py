@@ -238,6 +238,62 @@ class IllegalPosition(Check):
 
     def __init__(self, fen_label):
         super().__init__(fen_label=fen_label)
+    
+    def are_kings_less(self):
+        """
+        Rule on kings.
+        """
+        k_c = self.fen_label.count('k')
+        K_c = self.fen_label.count('K')
+        return (k_c < 1 and K_c < 1) or (k_c < 1) or (K_c < 1)
+    
+    def are_kings_more(self):
+        """
+        Rule on kings.
+        """
+        k_c = self.fen_label.count('k')
+        K_c = self.fen_label.count('K')
+        return (k_c > 1 and K_c > 1) or (k_c > 1) or (K_c > 1)
+    
+    def are_queens_more(self):
+        """
+        Rule on queens.
+        """
+        q_c = self.fen_label.count('q')
+        Q_c = self.fen_label.count('Q')
+        return (q_c > 9 and Q_c > 9) or (q_c > 9) or (Q_c > 9)
+    
+    def are_bishops_more(self):
+        """
+        Rule on bishops.
+        """
+        b_c = self.fen_label.count('b')
+        B_c = self.fen_label.count('B')
+        return (b_c > 10 and B_c > 10) or (b_c > 10) or (B_c > 10)
+    
+    def are_knights_more(self):
+        """
+        Rule on knights.
+        """
+        n_c = self.fen_label.count('n')
+        N_c = self.fen_label.count('N')
+        return (n_c > 10 and N_c > 10) or (n_c > 10) or (N_c > 10)
+    
+    def are_rooks_more(self):
+        """
+        Rule on rooks.
+        """
+        r_c = self.fen_label.count('r')
+        R_c = self.fen_label.count('R')
+        return (r_c > 10 and R_c > 10) or (r_c > 10) or (R_c > 10)
+    
+    def are_pawns_more(self):
+        """
+        Rule on pawns.
+        """
+        p_c = self.fen_label.count('p')
+        P_c = self.fen_label.count('P')
+        return (p_c > 8 and P_c > 8) or (p_c > 8) or (P_c > 8)
 
     def rule_1(self):
         """
@@ -251,31 +307,19 @@ class IllegalPosition(Check):
         7. The chessboard should never be empty.
         """
         flag = False
-        k_c = self.fen_label.count('k')
-        K_c = self.fen_label.count('K')
-        q_c = self.fen_label.count('q')
-        Q_c = self.fen_label.count('Q')
-        b_c = self.fen_label.count('b')
-        B_c = self.fen_label.count('B')
-        n_c = self.fen_label.count('n')
-        N_c = self.fen_label.count('N')
-        r_c = self.fen_label.count('r')
-        R_c = self.fen_label.count('R')
-        p_c = self.fen_label.count('p')
-        P_c = self.fen_label.count('P')
-        if (k_c < 1 and K_c < 1) or (k_c < 1) or (K_c < 1):
+        if self.are_kings_less():
             flag = True
-        elif (k_c > 1 and K_c > 1) or (k_c > 1) or (K_c > 1):
+        elif self.are_kings_more():
             flag = True
-        elif (q_c > 9 and Q_c > 9) or (q_c > 9) or (Q_c > 9):
+        elif self.are_queens_more():
             flag = True
-        elif (b_c > 10 and B_c > 10) or (b_c > 10) or (B_c > 10):
+        elif self.are_bishops_more():
             flag = True
-        elif (n_c > 10 and N_c > 10) or (n_c > 10) or (N_c > 10):
+        elif self.are_knights_more():
             flag = True
-        elif (r_c > 10 and R_c > 10) or (r_c > 10) or (R_c > 10):
+        elif self.are_rooks_more():
             flag = True
-        elif (p_c > 8 and P_c > 8) or (p_c > 8) or (P_c > 8):
+        elif self.are_pawns_more():
             flag = True
         return flag
 
