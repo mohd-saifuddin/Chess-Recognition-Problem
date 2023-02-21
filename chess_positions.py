@@ -238,7 +238,7 @@ class IllegalPosition(Check):
 
     def __init__(self, fen_label):
         super().__init__(fen_label=fen_label)
-    
+
     def are_kings_less(self):
         """
         Rule on kings.
@@ -246,7 +246,7 @@ class IllegalPosition(Check):
         k_c = self.fen_label.count('k')
         K_c = self.fen_label.count('K')
         return (k_c < 1 and K_c < 1) or (k_c < 1) or (K_c < 1)
-    
+
     def are_kings_more(self):
         """
         Rule on kings.
@@ -254,7 +254,7 @@ class IllegalPosition(Check):
         k_c = self.fen_label.count('k')
         K_c = self.fen_label.count('K')
         return (k_c > 1 and K_c > 1) or (k_c > 1) or (K_c > 1)
-    
+
     def are_queens_more(self):
         """
         Rule on queens.
@@ -262,7 +262,7 @@ class IllegalPosition(Check):
         q_c = self.fen_label.count('q')
         Q_c = self.fen_label.count('Q')
         return (q_c > 9 and Q_c > 9) or (q_c > 9) or (Q_c > 9)
-    
+
     def are_bishops_more(self):
         """
         Rule on bishops.
@@ -270,7 +270,7 @@ class IllegalPosition(Check):
         b_c = self.fen_label.count('b')
         B_c = self.fen_label.count('B')
         return (b_c > 10 and B_c > 10) or (b_c > 10) or (B_c > 10)
-    
+
     def are_knights_more(self):
         """
         Rule on knights.
@@ -278,7 +278,7 @@ class IllegalPosition(Check):
         n_c = self.fen_label.count('n')
         N_c = self.fen_label.count('N')
         return (n_c > 10 and N_c > 10) or (n_c > 10) or (N_c > 10)
-    
+
     def are_rooks_more(self):
         """
         Rule on rooks.
@@ -286,7 +286,7 @@ class IllegalPosition(Check):
         r_c = self.fen_label.count('r')
         R_c = self.fen_label.count('R')
         return (r_c > 10 and R_c > 10) or (r_c > 10) or (R_c > 10)
-    
+
     def are_pawns_more(self):
         """
         Rule on pawns.

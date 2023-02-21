@@ -81,7 +81,7 @@ class Pipeline(object):
             interpretation = "This is an illegal chess position. Reason is " + interpretation
         else:
             interpretation = self.check_interpreter(fen_label=fen_label)
-        
+
         return fen_label, interpretation
 
     def illegal_interpreter(self, fen_label):
