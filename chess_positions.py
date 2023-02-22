@@ -69,10 +69,11 @@ class Check(Board):
                 attack_path = self.fen_matrix[:, dj]
             else:
                 continue
-            a_ind = np.where(attack_path == a)[0][0]
+            a_ind = np.where(attack_path == a)[0]
             d_ind = np.where(attack_path == d)[0][0]
-            attack_path = attack_path[min(a_ind, d_ind): max(a_ind, d_ind)+1]
-            checks.append(np.where(attack_path != '1')[0])
+            for a_i_ in a_ind:
+                attack_path_ = attack_path[min(a_i_, d_ind): max(a_i_, d_ind)+1]
+                checks.append(np.where(attack_path_ != '1')[0])
         checks = list(filter(lambda x: len(x) == 2, checks))
         return checks
 
