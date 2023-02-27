@@ -12,7 +12,7 @@ The dataset has 100000 images of randomly generated chess positions of 5–15 pi
 
 ### Solution
 
-Application URL: https://mohd-saifuddin-stellar-classification-app-app-izkfa9.streamlit.app/
+Application URL: https://mohd-saifuddin-chess-recognition-application-app-fpa3mt.streamlit.app/
 
 Demo URL: https://youtu.be/i2un9UEr9rY
 
