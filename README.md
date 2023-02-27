@@ -10,6 +10,8 @@ The goal of my project is to recognize the chess pieces and their respective pos
 
 The dataset has 100000 images of randomly generated chess positions of 5–15 pieces (2 kings and 3–13 pawns/pieces). All images are 400 by 400 pixels.
 
+Dataset: https://www.kaggle.com/datasets/koryakinp/chess-positions
+
 ### Solution
 
 Application URL: https://mohd-saifuddin-chess-recognition-application-app-fpa3mt.streamlit.app/
