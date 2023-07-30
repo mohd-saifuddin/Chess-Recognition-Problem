@@ -4,7 +4,7 @@
 
 The problem of identifying the configuration of chess pieces from an image of a physical chessboard is often referred to as chess recognition. The ability of a computer to recognize the chess pieces on a chessboard is the first step to developing an intelligent system that can play chess, can solve chess problems/puzzles, and can perform chess analysis.
 
-The goal of my project is to recognize the chess pieces and their respective position on the chessboard which can be described in a structured format such as Forsyth–Edwards Notation (FEN) which is compatible with various chess engines. I also added an extra layer of interpretation which takes the generated FEN as input and outputs if there are any potential attacks (checks) and also spots illegal chess positions.
+The goal of my project is to recognize the chess pieces and their respective position on the chessboard and describe them in a structured format such as Forsyth–Edwards Notation (FEN) which is compatible with various chess engines. I also added an extra layer of interpretation which takes the generated FEN as input and outputs if there are any potential attacks (checks) and detects illegal chess positions.
 
 ### Dataset
 
@@ -14,7 +14,7 @@ Dataset: https://www.kaggle.com/datasets/koryakinp/chess-positions
 
 ### Solution
 
-Application URL: https://mohd-saifuddin-chess-recognition-application-app-fpa3mt.streamlit.app/
+Application URL: https://huggingface.co/spaces/mohd-saifuddin/Chess-Recognition-2D
 
 Demo URL: https://youtu.be/i2un9UEr9rY
 
